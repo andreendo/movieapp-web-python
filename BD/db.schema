@@ -1,0 +1,101 @@
+-- Esquema do banco de dados
+-- Para criar/recriar o bd, digitar no diretório BD:
+--   rm movies.db
+--   sqlite3 movies.db < db.schema
+
+create table user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name text, 
+  password text
+);
+
+create table movie (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name text, 
+  year integer
+);
+
+create table genre (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name text
+);
+
+CREATE TABLE movie_genre (
+  movie_id INTEGER,
+  genre_id INTEGER,
+  PRIMARY KEY (movie_id, genre_id),
+  FOREIGN KEY (movie_id) REFERENCES movie(id),
+  FOREIGN KEY (genre_id) REFERENCES genre(id)
+);
+
+insert into user (name, password) values ("andre", "aaa");
+insert into user (name, password) values ("taylor", "123");
+insert into user (name, password) values ("maria", "456");
+insert into user (name, password) values ("admin", "888");
+
+INSERT INTO movie (name, year) VALUES ('The Shawshank Redemption', 1994);
+INSERT INTO movie (name, year) VALUES ('Pulp Fiction', 1994);
+INSERT INTO movie (name, year) VALUES ('The Dark Knight', 2008);
+INSERT INTO movie (name, year) VALUES ('The Godfather', 1972);
+INSERT INTO movie (name, year) VALUES ('Inception', 2010);
+INSERT INTO movie (name, year) VALUES ('Schindlers List', 1993);
+INSERT INTO movie (name, year) VALUES ('Forrest Gump', 1994);
+INSERT INTO movie (name, year) VALUES ('The Matrix', 1999);
+INSERT INTO movie (name, year) VALUES ('Fight Club', 1999);
+INSERT INTO movie (name, year) VALUES ('The Silence of the Lambs', 1991);
+INSERT INTO movie (name, year) VALUES ('Jurassic Park', 1993);
+INSERT INTO movie (name, year) VALUES ('The Lord of the Rings: The Fellowship of the Ring', 2001);
+INSERT INTO movie (name, year) VALUES ('Star Wars: Episode IV - A New Hope', 1977);
+INSERT INTO movie (name, year) VALUES ('The Lord of the Rings: The Two Towers', 2002);
+INSERT INTO movie (name, year) VALUES ('The Shawshank Redemption', 1994);
+INSERT INTO movie (name, year) VALUES ('The Godfather: Part II', 1974);
+INSERT INTO movie (name, year) VALUES ('Forrest Gump', 1994);
+INSERT INTO movie (name, year) VALUES ('The Dark Knight Rises', 2012);
+INSERT INTO movie (name, year) VALUES ('The Lord of the Rings: The Return of the King', 2003);
+INSERT INTO movie (name, year) VALUES ('Forrest Gump', 1994);
+INSERT INTO movie (name, year) VALUES ('The Godfather: Part III', 1990);
+INSERT INTO movie (name, year) VALUES ('Titanic', 1997);
+INSERT INTO movie (name, year) VALUES ('Inception', 2010);
+
+-- Insert genres
+INSERT INTO genre (name) VALUES ('Drama');
+INSERT INTO genre (name) VALUES ('Crime');
+INSERT INTO genre (name) VALUES ('Action');
+INSERT INTO genre (name) VALUES ('Science Fiction');
+INSERT INTO genre (name) VALUES ('Fantasy');
+INSERT INTO genre (name) VALUES ('Biography');
+INSERT INTO genre (name) VALUES ('Romance');
+
+-- Associate genres with movies
+-- Assume genre IDs: 1 for Drama, 2 for Crime, 3 for Action, 4 for Science Fiction, 5 for Fantasy
+
+-- The Shawshank Redemption - Drama, Crime
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (1, 1); -- Drama
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (1, 2); -- Crime
+
+-- Pulp Fiction - Crime, Drama
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (2, 2); -- Crime
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (2, 1); -- Drama
+
+-- The Dark Knight - Action, Crime, Drama
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (3, 3); -- Action
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (3, 2); -- Crime
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (3, 1); -- Drama
+
+-- The Godfather - Crime, Drama
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (4, 2); -- Crime
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (4, 1); -- Drama
+
+-- Inception - Action, Science Fiction
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (5, 3); -- Action
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (5, 4); -- Science Fiction
+
+-- Schindler's List - Biography, Drama, History
+-- Assuming additional genres for historical movies
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (6, 1); -- Drama
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (6, 6); -- Biography
+
+-- Forrest Gump - Drama, Romance
+-- Assuming additional genres for romantic movies
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (7, 1); -- Drama
+INSERT INTO movie_genre (movie_id, genre_id) VALUES (7, 7); -- Romance

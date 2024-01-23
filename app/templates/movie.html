@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+{% include 'menu.html' %}
+
+<div class="container">
+  <h2>Add a new movie</h2>
+  <form method="post" action="/movie">
+    <table>
+      <tr>
+        <td><label for="moviename_field">Movie Name:</label></td>
+        <td><input name="moviename_field" size="30" type="text"></td>
+      </tr>
+      <tr>
+        <td><label for="year_field">Movie Year:</label></td>
+        <td><input name="year_field" size="4" type="number"></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td><input id="add_button" type="submit" value="ADD"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

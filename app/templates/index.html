@@ -1,0 +1,31 @@
+  {% extends "layout.html" %}
+  {% block body %}
+  <div class="container">
+     <div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+      <div class="col-md-12">
+      
+    <h1>Movies App</h1>
+    {% if error %}
+      <!-- <p class=error><strong>Error:</strong>  -->
+        <div class="alert alert-danger" role="alert">
+          {{ error }}
+        </div>
+    {% endif %}
+      <p>Please input your user name and password and click the login button.</p>
+      <form method="post" action="/login">
+        <div class="mb-3">
+          <label for="username" class="form-label">User Name:</label>
+          <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" value="{{ request.form.username }}">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <input id="login_button" type="submit" value="LOGIN" class="btn btn-primary">      </form>
+        </div>
+        </div>
+       </div>
+  </div>
+{% include 'footer.html' %}
+{% endblock %}
